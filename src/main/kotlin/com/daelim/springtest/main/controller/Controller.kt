@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import java.util.*
 
+
 @RestController
 class Controller {
     private val tests = mutableListOf<TestDto>()
@@ -42,4 +43,17 @@ class Controller {
         val response = tests.firstOrNull{it.id == userId}
         return ResponseEntity.ok().body(response)
     }
+    @DeleteMapping("/test/{id}")
+    fun deleteTestDto(
+        @PathVariable id: String
+    ): ResponseEntity<Void> {
+        val removed = tests.removeIf { it.id == id }
+
+        return if (removed) {
+            ResponseEntity.noContent().build()
+        } else {
+            ResponseEntity.notFound().build()
+        }
+    }
+
 }

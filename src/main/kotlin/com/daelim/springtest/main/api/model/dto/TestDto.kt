@@ -10,4 +10,5 @@ data class TestDto(
 
 data class TestDtoRequest(
     val id: String,
+    val email: String
 )
