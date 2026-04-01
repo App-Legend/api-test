@@ -3,6 +3,7 @@ package com.daelim.springtest.main.controller
 import com.daelim.springtest.main.api.model.dto.TestDto
 import com.daelim.springtest.main.api.model.dto.TestDtoRequest
 import net.datafaker.Faker
+import net.datafaker.providers.base.Address
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import java.util.Locale
@@ -21,7 +22,7 @@ class Controller {
     ): ResponseEntity<TestDto> {
         val test = TestDto(
             id = testDtoRequest.id,
-            address = faker.address().fullAddress(),
+            address = testDtoRequest.address,
             email = testDtoRequest.email,
             tel = faker.phoneNumber().phoneNumber(),
             age = Random.nextInt(1, 101)
@@ -46,6 +47,14 @@ class Controller {
         } else {
             ResponseEntity.notFound().build()
         }
+    }
+
+    @GetMapping("/test/{address}")
+    fun getTestDtoAddress(
+        @PathVariable("address") userAddress: String
+    ): ResponseEntity<List<TestDto>> {
+        tests.firstOrNull{it.address == userAddress}
+        return ResponseEntity.ok(tests)
     }
 
     @DeleteMapping("/test/{id}")
@@ -74,4 +83,6 @@ class Controller {
             ResponseEntity.notFound().build()
         }
     }
+
+
 }
