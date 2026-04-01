@@ -61,7 +61,7 @@ class Controller {
         }
     }
 
-    @GetMapping("/test/{tel}")
+    @GetMapping("/test/tel")
     fun getTestDtoByTel(
         @RequestParam tel: String
     ): ResponseEntity<TestDto> {
