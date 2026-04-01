@@ -61,6 +61,7 @@ class Controller {
         }
     }
 
+    //이메일
     @GetMapping("/test/{email}")
     fun getTestDtoByEmail(
         @RequestParam email: String
