@@ -9,8 +9,9 @@ type Test {
 type Query {
     findAllTests: [Test],
     findTestById(id: ID!): Test
+    findTestByEmail(email: String!): Test
 }
 
 type Mutation {
-    createTest(userId: String): Test
+    createTest(userId: String!, userEmail: String!): Test
 }
