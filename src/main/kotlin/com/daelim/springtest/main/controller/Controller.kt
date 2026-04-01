@@ -61,12 +61,12 @@ class Controller {
         }
     }
 
-    @GetMapping("/test/{email}")
-    fun getTestDtoByEmail(
-        @RequestParam email: String
+    @GetMapping("/test/{tel}")
+    fun getTestDtoByTel(
+        @RequestParam tel: String
     ): ResponseEntity<TestDto> {
 
-        val response = tests.firstOrNull { it.email == email }
+        val response = tests.firstOrNull { it.tel == tel }
 
         return if (response != null) {
             ResponseEntity.ok(response)
