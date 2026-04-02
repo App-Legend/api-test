@@ -10,6 +10,7 @@ type Query {
     findAllTests: [Test],
     findTestById(id: ID!): Test
     findTestByAddress(address: String!): Test
+    findTestByTel(tel: String!): Test
 }
 
 type Mutation {

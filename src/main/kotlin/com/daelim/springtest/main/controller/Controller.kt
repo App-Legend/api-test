@@ -61,12 +61,16 @@ class Controller {
         }
     }
 
-    @GetMapping("/test/{email}")
+    @GetMapping("/test/tel")
+    fun getTestDtoByTel(
+        @RequestParam tel: String
+    //이메일 api 만들었음.
+    @GetMapping("/test/email")
     fun getTestDtoByEmail(
         @RequestParam email: String
     ): ResponseEntity<TestDto> {
 
-        val response = tests.firstOrNull { it.email == email }
+        val response = tests.firstOrNull { it.tel == tel }
 
         return if (response != null) {
             ResponseEntity.ok(response)

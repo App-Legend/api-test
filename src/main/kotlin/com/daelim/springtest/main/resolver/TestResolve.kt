@@ -23,21 +23,29 @@ class PostResolver {
         return tests.find { it.id == id }
     }
 
+    // 건우 주소 조회
     @QueryMapping
     fun findTestByAddress(@Argument address: String): TestDto? { // 파라미터는 @Argument 필수
         return tests.find { it.address == address }
     }
-
+    
+    // 윤서 전화번호 조회
+    @QueryMapping
+    fun findTestByTel(@Argument tel: String): TestDto? {
+        return tests.find { it.tel == tel }
+    }
+    
     @MutationMapping // 스키마의 Mutation { createTest(userId: String) }와 매핑
-    fun createTest(@Argument userId: String, @Argument userAddress: String): TestDto {
+    fun createTest(@Argument userId: String, @Argument userAddress: String, @Argument userTel: String): TestDto {
         val test = TestDto(
             id = userId,
-            address = userAddress,
+            address = userAddress, //건우
             email = faker.internet().emailAddress(),
-            tel = faker.phoneNumber().phoneNumber(),
+            tel = userTel, //윤서
             age = Random().nextInt(100)
-        )
-        tests.add(test)
-        return test
+      )
+      tests.add(test)
+      return test
+
     }
 }
