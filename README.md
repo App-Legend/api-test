@@ -9,4 +9,4 @@
 http://localhost:8080/swagger-ui/index.html
 
 ## GraphQL (GRAPHIQL)
-http://localhost:8080/graphiql
+http://localhost:8080/graphiql.html
