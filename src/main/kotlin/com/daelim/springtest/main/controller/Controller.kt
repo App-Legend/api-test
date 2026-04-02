@@ -21,7 +21,7 @@ class Controller {
     ): ResponseEntity<TestDto> {
         val test = TestDto(
             id = testDtoRequest.id,
-            address = faker.address().fullAddress(),
+            address = testDtoRequest.address,
             email = testDtoRequest.email,
             tel = faker.phoneNumber().phoneNumber(),
             age = Random.nextInt(1, 101)
@@ -85,6 +85,21 @@ class Controller {
     ): ResponseEntity<TestDto> {
 
         val response = tests.firstOrNull { it.tel == tel }
+
+        return if (response != null) {
+            ResponseEntity.ok(response)
+        } else {
+            ResponseEntity.notFound().build()
+        }
+    }
+
+    // 건우 주소 조회
+    @GetMapping("/test/address")
+    fun getTestDtoByAddress(
+        @RequestParam address: String
+    ): ResponseEntity<TestDto> {
+
+        val response = tests.firstOrNull { it.address == address }
 
         return if (response != null) {
             ResponseEntity.ok(response)
