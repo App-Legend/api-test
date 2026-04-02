@@ -61,7 +61,8 @@ class Controller {
         }
     }
 
-    @GetMapping("/test/{email}")
+    //이메일 api 만들었음.
+    @GetMapping("/test/email")
     fun getTestDtoByEmail(
         @RequestParam email: String
     ): ResponseEntity<TestDto> {
