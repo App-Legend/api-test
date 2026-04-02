@@ -49,14 +49,16 @@ class Controller {
         }
     }
 
-    @GetMapping("/test/{address}")
+    // 주소 조회
+    @GetMapping("/test/address")
     fun getTestDtoAddress(
-        @PathVariable("address") userAddress: String
+        @RequestParam userAddress: String
     ): ResponseEntity<List<TestDto>> {
         tests.firstOrNull{it.address == userAddress}
         return ResponseEntity.ok(tests)
     }
 
+    // id 삭제
     @DeleteMapping("/test/{id}")
     fun deleteTestDto(
         @PathVariable id: String
@@ -70,19 +72,6 @@ class Controller {
         }
     }
 
-    @GetMapping("/test/{email}")
-    fun getTestDtoByEmail(
-        @RequestParam email: String
-    ): ResponseEntity<TestDto> {
-
-        val response = tests.firstOrNull { it.email == email }
-
-        return if (response != null) {
-            ResponseEntity.ok(response)
-        } else {
-            ResponseEntity.notFound().build()
-        }
-    }
 
 
 }
