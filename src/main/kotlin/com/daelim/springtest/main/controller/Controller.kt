@@ -21,7 +21,7 @@ class Controller {
     ): ResponseEntity<TestDto> {
         val test = TestDto(
             id = testDtoRequest.id,
-            address = faker.address().fullAddress(),
+            address = testDtoRequest.address,
             email = testDtoRequest.email,
             tel = faker.phoneNumber().phoneNumber(),
             age = Random.nextInt(1, 101)
@@ -48,6 +48,7 @@ class Controller {
         }
     }
 
+    // 삭제
     @DeleteMapping("/test/{id}")
     fun deleteTestDto(
         @PathVariable id: String
@@ -61,12 +62,44 @@ class Controller {
         }
     }
 
-    @GetMapping("/test/{email}")
+
+    //이메일 api 만들었음. (수연)
+    @GetMapping("/test/email")
     fun getTestDtoByEmail(
         @RequestParam email: String
     ): ResponseEntity<TestDto> {
 
         val response = tests.firstOrNull { it.email == email }
+
+        return if (response != null) {
+            ResponseEntity.ok(response)
+        } else {
+            ResponseEntity.notFound().build()
+        }
+    }
+
+    // 윤서 전화번호 조회
+    @GetMapping("/test/tel")
+    fun getTestDtoByTel(
+        @RequestParam tel: String
+    ): ResponseEntity<TestDto> {
+
+        val response = tests.firstOrNull { it.tel == tel }
+
+        return if (response != null) {
+            ResponseEntity.ok(response)
+        } else {
+            ResponseEntity.notFound().build()
+        }
+    }
+
+    // 건우 주소 조회
+    @GetMapping("/test/address")
+    fun getTestDtoByAddress(
+        @RequestParam address: String
+    ): ResponseEntity<TestDto> {
+
+        val response = tests.firstOrNull { it.address == address }
 
         return if (response != null) {
             ResponseEntity.ok(response)
