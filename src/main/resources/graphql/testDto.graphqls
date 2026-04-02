@@ -9,7 +9,7 @@ type Test {
 type Query {
     findAllTests: [Test],
     findTestById(id: ID!): Test
-    findTestByEmail(email: String!): Test
+    findTestByTel(tel: String!): Test
 }
 
 type Mutation {

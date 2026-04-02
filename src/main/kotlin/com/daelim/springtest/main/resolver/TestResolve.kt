@@ -26,19 +26,19 @@ class PostResolver {
     }
 
     @QueryMapping
-    fun findTestByEmail(@Argument email: String): TestDto? {
-        return tests.find { it.email == email }
+    fun findTestByTel(@Argument tel: String): TestDto? {
+        return tests.find { it.email == tel }
     }
 
     @MutationMapping
     fun createTest(
         @Argument userId: String,
-        @Argument userEmail: String
+        @Argument userTel: String
     ): TestDto {
         val test = TestDto(
             id = userId,
             address = faker.address().fullAddress(),
-            email = userEmail,
+            email = userTel,
             tel = faker.phoneNumber().phoneNumber(),
             age = Random.nextInt(1, 101)
         )
