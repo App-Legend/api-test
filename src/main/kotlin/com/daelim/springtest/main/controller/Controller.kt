@@ -24,7 +24,7 @@ class Controller {
             address = testDtoRequest.address,
             email = testDtoRequest.email,
             tel = faker.phoneNumber().phoneNumber(),
-            age = Random.nextInt(1, 101)
+            age = testDtoRequest.age,
         )
         tests.add(test)
         return ResponseEntity.ok(test)
@@ -100,6 +100,21 @@ class Controller {
     ): ResponseEntity<TestDto> {
 
         val response = tests.firstOrNull { it.address == address }
+
+        return if (response != null) {
+            ResponseEntity.ok(response)
+        } else {
+            ResponseEntity.notFound().build()
+        }
+    }
+
+    // 신용 나이 조회
+    @GetMapping("/test/age")
+    fun getTestDtoByEmail(
+        @RequestParam age: Int
+    ): ResponseEntity<TestDto> {
+
+        val response = tests.firstOrNull { it.age == age }
 
         return if (response != null) {
             ResponseEntity.ok(response)
